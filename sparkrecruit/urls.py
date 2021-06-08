@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
     path('api/Jobs/', include('Clients.api.urls', namespace='Jobs'))
 ]
 admin.site.site_header ="SPARK RECRUITMENT ADMIN"

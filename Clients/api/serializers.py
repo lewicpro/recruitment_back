@@ -12,18 +12,18 @@ User = get_user_model()
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
-    token = CharField(allow_blank=True, read_only=True)
+    # token = CharField(allow_blank=True, read_only=True)
     username = CharField(allow_blank=True)
-    email = EmailField(label="email ", allow_blank=True)
+    # email = EmailField(label="email ", allow_blank=True)
     
     class Meta:
         model = User
         fields =[
             'pk', 
             'username',
-            'email',
+            # 'email',
             'password',
-            'token',
+            # 'token',
         ]
 
         extra_kwargs = {"password":
