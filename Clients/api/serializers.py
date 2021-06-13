@@ -127,7 +127,7 @@ class DeleteSerializer(serializers.ModelSerializer):
 class ClientsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientsModels
-        fields=['pk', 'username', 'Gender', 'fullname', 'email', 'description', 'end',  'position', 'start', 'client_first_name', 'client_second_name', 'client_third_name', 'Birthdate', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'twitter_url',  'faceboo_url', 'instagram_url', 'Country_code', 'spark_url', 'pinterest_url', 'City', 'Country'] 
+        fields=['pk', 'username', 'Gender', 'fullname', 'email', 'description', 'end',  'position', 'start', 'client_first_name', 'client_second_name', 'client_third_name', 'Birthdate', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'twitter_url',  'faceboo_url', 'instagram_url', 'Country_code', 'spark_url', 'pinterest_url', 'City', 'Country'] 
     
 
 class UserSerializer(serializers.ModelSerializer):

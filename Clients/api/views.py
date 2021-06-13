@@ -153,20 +153,20 @@ class Job_requestsView(generics.CreateAPIView, generics.ListAPIView):
 			Mobile_number = serializer.validated_data['Mobile_number']
 			# Gender = serializer.validated_data['Gender']
 			Complete_address = serializer.validated_data['Complete_address']
-			Country = serializer.validated_data['Country']
+			# Country = serializer.validated_data['Country']
 			# Age = serializer.validated_data['Age']
 			Nationality = serializer.validated_data['Nationality']
-			# position = serializer.validated_data['position']
+			Gender = serializer.validated_data['Gender']
 			City = serializer.validated_data['City']
 			instagram_url = serializer.validated_data['instagram_url']
 			spark_url = serializer.validated_data['spark_url']
-			Linkedin = serializer.validated_data['Linkedin']
+			# Linkedin = serializer.validated_data['Linkedin']
 			Country_code = serializer.validated_data['Country_code']
 			twitter_url = serializer.validated_data['twitter_url']
 			pinterest_url = serializer.validated_data['pinterest_url']
 			faceboo_url = serializer.validated_data['faceboo_url']
 
-			moxt=ClientsModels.objects.filter(username=username).update(Linkedin=Linkedin, Country=Country, client_first_name=client_first_name, client_second_name='client_second_name', client_third_name='client_third_name', Country_code='Country_code', Birthdate='Birthdate', Complete_address='Complete_address', Nationality='Nationality', City='City', faceboo_url='faceboo_url', instagram_url='instagram_url', spark_url='spark_url', twitter_url='twitter_url', pinterest_url='pinterest_url', Mobile_number='Mobile_number')
+			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Country_code=Country_code, Birthdate=Birthdate, Complete_address=Complete_address, Gender=Gender, Nationality=Nationality, City=City, faceboo_url=faceboo_url, instagram_url=instagram_url, spark_url=spark_url, twitter_url=twitter_url, pinterest_url=pinterest_url, Mobile_number=Mobile_number)
 			# mon = serializer.save()
 
 			return Response(serializer.validated_data)
