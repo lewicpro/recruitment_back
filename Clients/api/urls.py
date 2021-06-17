@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
     # url(r'^$', numberGetview.as_view(), name='numberCreate'),
     url(r'^UserCreate/$', CreateUserView.as_view(), name='nubergen'),
+    url(r'^getalljobs/$', getalljobsView.as_view(), name='nubergen'),
     url(r'^login/$', UserLoginAPIView.as_view(), name='login'),
     url(r'^postClient/(?P<username>.+)/$', Job_requestsView.as_view(), name='data'),
     url(r'^jobpost/(?P<username>.+)/$', Job_PostsView.as_view(), name='data'),
@@ -39,11 +40,14 @@ urlpatterns = [
     url(r'^Sendfile/(?P<username>.+)/$', CVView.as_view(), name='data'),
     url(r'^cvpull/(?P<username>.+)/$', CVView.as_view(), name='data'),
     url(r'^package/(?P<username>.+)/$', packageview.as_view(), name='data'),
+    url(r'^jobposthome/(?P<username>.+)/$', jobposthomeView.as_view(), name='data'),
     url(r'^search/(?P<username>.+)/(?P<values>.+)/$', SearchJobview.as_view(), name='data'),
     url(r'^postapply/(?P<username>.+)/(?P<pk>.+)/$', ApplyJobview.as_view(), name='data'),
     url(r'^postalert/(?P<username>.+)/$', Job_PostsView.as_view(), name='data'),
+    url(r'^uploadprofile/(?P<username>.+)/$', uploadprofileView.as_view(), name='profile'),
+    url(r'^empdata/(?P<username>.+)/$', GetclientdataView.as_view(), name='data'),
     url(r'^deleteapplied/(?P<action>.+)/(?P<pk>.+)/$', Deleteview.as_view(), name='data'),
-    url(r'^updatuser/(?P<action>.+)/$', Upadateview.as_view(), name='data'),
+    url(r'^updatuser/(?P<username>.+)/$', Upadateview.as_view(), name='data'),
   
 
 

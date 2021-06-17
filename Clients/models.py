@@ -34,8 +34,11 @@ class Job_Posts(models.Model):
     title=models.CharField(max_length=120, blank=True, null=True)
     description=models.CharField(max_length=120, blank=True, null=True)
     start=models.CharField(max_length=120, blank=True, null=True)
+    location=models.CharField(max_length=120, blank=True, null=True)
+    working_type=models.CharField(max_length=120, blank=True, null=True)
+    Short_description=models.CharField(max_length=30, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
-    logo=models.FileField()
+    logo=models.FileField(blank=True)
 
 class Applied(models.Model):
     Date_applied=models.CharField(max_length=120, blank=True, null=True)
@@ -74,7 +77,7 @@ class ClientsModels(models.Model):
     client_third_name=models.CharField(max_length=120, blank=True, null=True)
     Country_code=models.CharField(max_length=120, blank=True, null=True)
     Birthdate=models.CharField(max_length=120, blank=True, null=True)
-    Client_profile=models.CharField(max_length=120, blank=True, null=True)
+    Client_profile=models.FileField(blank=True, null=True)
     # Email=models.CharField(max_length=120, blank=True, null=True)
     Mobile_number=models.CharField(max_length=120, blank=True, null=True)
     Gender=models.CharField(max_length=120, blank=True, null=True)

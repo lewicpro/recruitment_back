@@ -8,9 +8,9 @@ class Job_RequestsAdmin(admin.ModelAdmin):
     list_display=['client_first_name', 'client_third_name', 'Mobile_number', 'Age', 'City', 'Job_seeking']
 
 class Job_PostsAdmin(admin.ModelAdmin):
-    search_fields = ('Qualification', 'officer', 'category', 'title', 'start', 'description', 'end',
+    search_fields = ('Qualification', 'officer', 'location', 'working_type', 'category', 'title', 'start', 'description', 'end',
             )
-    list_display=['Qualification', 'officer', 'title', 'start', 'description', 'end',]
+    list_display=['Qualification', 'officer', 'location', 'working_type', 'title', 'start', 'description', 'end',]
 
 class QualificationAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',

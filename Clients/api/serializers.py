@@ -112,6 +112,9 @@ class Job_PostsSerializer(serializers.ModelSerializer):
             'start', 
             'description', 
             'end',
+            'location', 
+            'working_type',
+            'Short_description',
         ]
 
 class ApplyJobSerializer(serializers.ModelSerializer):

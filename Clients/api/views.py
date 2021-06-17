@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 
 from datetime import datetime, timedelta
 from django.utils import timezone
+from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -111,19 +112,35 @@ class ExperienceView(generics.CreateAPIView, generics.ListAPIView):
 
 class Upadateview(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
-	serializer_class = Job_requestsSerializer
+	serializer_class = ClientsSerializer
 	permission_classes = [AllowAny]
 
 
 	def get_queryset(self):
 		user=self.kwargs['pk']
-		return Job_requests.objects.filter(user=user)
+		return ClientsModels.objects.filter(user=user)
 
 	def post(self, request, *args, **kwargs):
 		data = request.data
-		serializer = Job_requestsSerializer(data=data)
+		username= self.kwargs["username"]
+		serializer = ClientsSerializer(data=data)
 		if serializer.is_valid(raise_exception=True):
-			mon = serializer.save()
+			client_first_name = serializer.validated_data['client_first_name']
+			client_second_name = serializer.validated_data['client_second_name']
+			client_third_name = serializer.validated_data['client_third_name']
+			Gender = serializer.validated_data['Gender']
+			Country_code = serializer.validated_data['Country_code']
+			Birthdate = serializer.validated_data['Birthdate']
+			# Mobile_number = serializer.validated_data['Mobile_number']
+			City = serializer.validated_data['City']
+			# logo = serializer.validated_data['logo']
+			Nationality = serializer.validated_data['Nationality']
+			Complete_address = serializer.validated_data['Complete_address']
+			# pregstration = serializer.validated_data['pregstration']
+
+			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Birthdate=Birthdate, Country_code=Country_code, City=City, Gender=Gender, Complete_address=Complete_address, Nationality=Nationality)
+
+			# mon = serializer.save()
 
 			
 			return Response(serializer.validated_data)
@@ -172,6 +189,31 @@ class Job_requestsView(generics.CreateAPIView, generics.ListAPIView):
 			return Response(serializer.validated_data)
 	
 
+class uploadprofileView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = ClientsSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		return Job_requests.objects.all()
+
+	def post(self, request, *args, **kwargs):
+		data = request.data
+		username=self.kwargs['username']
+		serializer = ClientsSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+	
+			username = serializer.validated_data['username']
+			Client_profile = serializer.validated_data['Client_profile']
+		
+
+			moxt=ClientsModels.objects.filter(username=username).update(Client_profile=Client_profile)
+			# mon = serializer.save()
+
+			return Response(serializer.validated_data)
+	
+
 
 class packageview(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -192,6 +234,26 @@ class CVView(generics.CreateAPIView, generics.ListAPIView):
 		return CV.objects.all()
 
 class Job_PostsView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = Job_PostsSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		return Job_Posts.objects.all()
+
+class jobposthomeView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = Job_PostsSerializer
+	permission_classes = [AllowAny]
+	pagination_class = PostPageNumberPagination
+	
+
+
+	def get_queryset(self):
+		return Job_Posts.objects.all()
+
+class getalljobsView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
 	serializer_class = Job_PostsSerializer
 	permission_classes = [AllowAny]
