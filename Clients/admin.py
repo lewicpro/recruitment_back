@@ -16,6 +16,7 @@ class QualificationAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',
             )
     list_display=['user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',]
+    readonly_fields = ('company', )   
 class ClientProfileAdmin(admin.ModelAdmin):
     search_fields = ('date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',
             )
@@ -24,6 +25,9 @@ class CompanyProfileAdmin(admin.ModelAdmin):
     search_fields = ('date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',
             )
     list_display=['date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',]
+    def officer_added(self, obj):
+        return obj.get_full_name()
+    officer_added.short_description = 'Date adde'
     
 class AppliedAdmin(admin.ModelAdmin):
     search_fields = ('Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'Age_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',
@@ -38,6 +42,7 @@ class SkillsAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromskill', 'toskill', 'company_attended',
             )
     list_display=['user', 'company', 'fromskill', 'toskill', 'company_attended',]
+    readonly_fields = ('company', )   
 class VoucherAdmin(admin.ModelAdmin):
     search_fields = ('voucher_token', 'username', 'company_name',)
     list_display=['voucher_token', 'username', 'company_name', 'status',]
@@ -55,26 +60,31 @@ class VoucherAdmin(admin.ModelAdmin):
 class categoriesAdmin(admin.ModelAdmin):
     search_fields = ('date', 'user', 'company', 'category',)
     list_display=['date', 'user', 'company', 'category',]
+    readonly_fields = ('company', )   
 
 class CVAdmin(admin.ModelAdmin):
     search_fields = ('dateaded', 'fullname',  'company', 'cvtittle', 'cvfile', 'status',
             )
     list_display=['dateaded', 'fullname',  'company', 'cvtittle', 'cvfile', 'status']
+    readonly_fields = ('company', )   
 
 class ClientsAdmin(admin.ModelAdmin):
     search_fields = ['username', 'fullname',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url', ]
             
     list_display=['username', 'fullname',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
+    readonly_fields = ('company', )   
 class ExperienceAdmin(admin.ModelAdmin):
     search_fields = ['user', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
             
     list_display=['user', 'company', 'skillsexperience', 'Levelexperience', 'status',]
+    readonly_fields = ('company', )   
 
 
 class PackagesAdmin(admin.ModelAdmin):
     search_fields = ['dateaded', 'package', 'company', 'timeframe', 'fullname', 'percentage', 'status', ]
             
     list_display=('dateaded', 'package', 'company', 'timeframe', 'fullname', 'percentage', 'status', )
+    readonly_fields = ('company', )   
 
 admin.site.register(Job_requests, Job_RequestsAdmin)
 admin.site.register(Job_Posts, Job_PostsAdmin)

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Clients',
     'rest_framework',
     'corsheaders',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
