@@ -178,7 +178,8 @@ USE_L10N = True
 USE_TZ = True
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'sparkrecruit/Clients/media')
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'sparkrecruit/Clients/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "Clients/media")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

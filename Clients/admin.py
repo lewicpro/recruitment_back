@@ -16,6 +16,15 @@ class QualificationAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',
             )
     list_display=['user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',]
+class ClientProfileAdmin(admin.ModelAdmin):
+    search_fields = ('date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',
+            )
+    list_display=['date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',]
+class CompanyProfileAdmin(admin.ModelAdmin):
+    search_fields = ('date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',
+            )
+    list_display=['date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',]
+    
 class AppliedAdmin(admin.ModelAdmin):
     search_fields = ('Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'Age_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',
             )
@@ -29,6 +38,23 @@ class SkillsAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromskill', 'toskill', 'company_attended',
             )
     list_display=['user', 'company', 'fromskill', 'toskill', 'company_attended',]
+class VoucherAdmin(admin.ModelAdmin):
+    search_fields = ('voucher_token', 'username', 'company_name',)
+    list_display=['voucher_token', 'username', 'company_name', 'status',]
+
+    # def has_change_permission(self, request, obj=None):
+    #     if obj is not None and obj.voucher_token:
+    #         return False
+    #     return super().has_change_permission(request, obj=obj)
+
+    # def get_readonly_fields(self, request, obj=None):
+    #     if obj is None:
+    #         return ['voucher_token']
+    #     return ['voucher_token']
+
+class categoriesAdmin(admin.ModelAdmin):
+    search_fields = ('date', 'user', 'company', 'category',)
+    list_display=['date', 'user', 'company', 'category',]
 
 class CVAdmin(admin.ModelAdmin):
     search_fields = ('dateaded', 'fullname',  'company', 'cvtittle', 'cvfile', 'status',
@@ -36,9 +62,9 @@ class CVAdmin(admin.ModelAdmin):
     list_display=['dateaded', 'fullname',  'company', 'cvtittle', 'cvfile', 'status']
 
 class ClientsAdmin(admin.ModelAdmin):
-    search_fields = ['username', 'fullname',  'position', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url', ]
+    search_fields = ['username', 'fullname',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url', ]
             
-    list_display=['username', 'fullname',  'position', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
+    list_display=['username', 'fullname',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
 class ExperienceAdmin(admin.ModelAdmin):
     search_fields = ['user', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
             
@@ -58,5 +84,8 @@ admin.site.register(SkillsModels, SkillsAdmin)
 admin.site.register(ExperienceModels, ExperienceAdmin)
 admin.site.register(CV, CVAdmin)
 admin.site.register(Packages, PackagesAdmin)
+admin.site.register(Voucher, VoucherAdmin)
 admin.site.register(Applied, AppliedAdmin)
 admin.site.register(Deleted, DeletedAdmin)
+admin.site.register(Client_profile, ClientProfileAdmin)
+admin.site.register(Company, CompanyProfileAdmin)

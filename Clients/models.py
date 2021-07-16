@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import random, string
 
 
 class Job_requests(models.Model):
@@ -29,29 +30,46 @@ class Job_requests(models.Model):
 class Job_Posts(models.Model):
     Qualification=models.CharField(max_length=120, blank=True, null=True)
     company=models.CharField(max_length=120, blank=True, null=True)
+    workexperience=models.CharField(max_length=120, blank=True, null=True)
+    experience=models.CharField(max_length=120, blank=True, null=True)
     category=models.CharField(max_length=120, blank=True, null=True)
     officer=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
     description=models.CharField(max_length=120, blank=True, null=True)
     start=models.CharField(max_length=120, blank=True, null=True)
     location=models.CharField(max_length=120, blank=True, null=True)
+    Gender=models.CharField(max_length=120, blank=True, null=True)
+    language=models.CharField(max_length=120, blank=True, null=True)
     working_type=models.CharField(max_length=120, blank=True, null=True)
     Short_description=models.CharField(max_length=30, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
     logo=models.FileField(blank=True)
 
+class categories(models.Model):
+    date=models.DateField()
+    user=models.CharField(max_length=120, blank=True, null=True)
+    company=models.CharField(max_length=120, blank=True, null=True)
+    category=models.CharField(max_length=120, blank=True, null=True)
+
 class Applied(models.Model):
     Date_applied=models.CharField(max_length=120, blank=True, null=True)
     Job_title=models.CharField(max_length=120, blank=True, null=True)
+    Qualification=models.CharField(max_length=120, blank=True, null=True)
     applicant_username=models.CharField(max_length=120, blank=True, null=True)
     name_of_applicant=models.CharField(max_length=120, blank=True, null=True)
     Age_of_applicant=models.CharField(max_length=120, blank=True, null=True)
     company=models.CharField(max_length=120, blank=True, null=True)
+    Gender=models.CharField(max_length=120, blank=True, null=True)
+    location=models.CharField(max_length=120, blank=True, null=True)
     category=models.CharField(max_length=120, blank=True, null=True)
     officer_posted=models.CharField(max_length=120, blank=True, null=True)
+    status=models.CharField(max_length=120, blank=True, default="pending")
+    start=models.CharField(max_length=120, blank=True, null=True)
+    end=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
     description=models.CharField(max_length=120, blank=True, null=True)
-    start=models.CharField(max_length=120, blank=True, null=True)
+    workexperience=models.CharField(max_length=120, blank=True, null=True)
+    experience=models.CharField(max_length=120, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
 
 class Deleted(models.Model):
@@ -89,7 +107,7 @@ class ClientsModels(models.Model):
     City=models.CharField(max_length=120, blank=True, null=True)
     upload_cv=models.CharField(max_length=120, blank=True, null=True)
     category=models.CharField(max_length=120, blank=True, null=True)
-    # Age=models.CharField(max_length=120, blank=True, null=True)
+    company=models.CharField(max_length=120, blank=True, default='self')
     Job_seeking=models.CharField(max_length=120, blank=True, null=True)
     faceboo_url=models.CharField(max_length=120, blank=True, null=True)
     instagram_url=models.CharField(max_length=120, blank=True, null=True)
@@ -97,6 +115,7 @@ class ClientsModels(models.Model):
     Linkedin=models.CharField(max_length=120, blank=True, null=True)
     twitter_url=models.CharField(max_length=120, blank=True, null=True)
     pinterest_url=models.CharField(max_length=120, blank=True, null=True)
+    company_profile=models.CharField(max_length=120, blank=True, null=True)
     logo=models.FileField(blank=True, null=True)
 
 
@@ -152,4 +171,44 @@ class Packages(models.Model):
     status=models.CharField(max_length=120, blank=True, default='Active')
 
     
+class Company(models.Model):
+    date_added=models.DateTimeField(max_length=120, blank=True, null=True)
+    company_name =models.CharField(max_length=120, blank=True, null=True)
+    officer_added = models.CharField(max_length=120, blank=True, null=True)
+    profile_photo =models.CharField(max_length=120, blank=True, null=True)
+    bio =models.CharField(max_length=120, blank=True, null=True)
 
+class Client_profile(models.Model):
+    date_added=models.DateTimeField(auto_now=True, auto_now_add=False, null=True)
+    username =models.CharField(max_length=120, blank=True, null=True)
+    company_name =models.CharField(max_length=120, blank=True, null=True)
+    officer_name = models.CharField(max_length=120, blank=True, null=True)
+    possition = models.CharField(max_length=120, blank=True, null=True)
+    profile_photo =models.FileField(blank=True, null=True)
+    bio=models.CharField(max_length=120, blank=True, null=True)
+
+
+used = 'used'
+new = 'new'
+sign = (
+    (new, 'new'),
+    (used, 'used'),
+)
+class Voucher(models.Model):
+    voucher_token=models.CharField(max_length=120, unique=True, blank=True, null=True)
+    username =models.CharField(max_length=120, blank=True, null=True)
+    company_name =models.CharField(max_length=120, blank=True, null=True)
+    status =models.CharField(max_length=120, blank=True, null=True, choices=sign)
+
+    def save(self, *args, **kwargs):
+        if self.voucher_token is None or self.voucher_token == "":
+            self.voucher_token = account_generator()
+        super(Voucher, self).save(*args, **kwargs)
+
+    
+
+def account_generator(size=8, chars=string.digits):
+    account = 'http://localhost:4200/regcompany/?token=SPK' + ''
+    for _ in range(size):
+        account += random.choice(chars)
+    return account

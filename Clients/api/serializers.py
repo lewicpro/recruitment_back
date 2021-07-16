@@ -95,6 +95,11 @@ class  CVSerializer(serializers.ModelSerializer):
         model = CV
         fields=['pk', 'dateaded', 'user', 'fullname',  'company', 'cvtittle', 'cvfile', 'status']
 
+class  CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = categories
+        fields=['date', 'user', 'company', 'category',]
+
 class  PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Packages
@@ -106,6 +111,44 @@ class Job_PostsSerializer(serializers.ModelSerializer):
         fields=[
             'pk', 
             'Qualification', 
+            'workexperience', 
+            'experience', 
+            'company', 
+            'Gender', 
+            'language', 
+            'officer', 
+            'category', 
+            'title', 
+            'start', 
+            'description', 
+            'end',
+            'location', 
+            'working_type',
+            'Short_description',
+        ]
+class ClientProfileSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Client_profile
+        fields=[
+            'pk', 'date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',
+        ]
+class CompanyProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields=[
+            'pk', 'date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',
+        ]
+class Job_PostsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job_Posts
+        fields=[
+            'pk', 
+            'Qualification', 
+            'workexperience', 
+            'experience', 
+            'company', 
+            'Gender', 
+            'language', 
             'officer', 
             'category', 
             'title', 
@@ -120,7 +163,7 @@ class Job_PostsSerializer(serializers.ModelSerializer):
 class ApplyJobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applied
-        fields=['pk', 'Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'Age_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',]
+        fields=['pk', 'Qualification', 'Date_applied', 'Job_title', 'Gender', 'location', 'applicant_username', 'workexperience', 'experience',  'name_of_applicant', 'Age_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'status', 'start',]
         
 class DeleteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -130,7 +173,7 @@ class DeleteSerializer(serializers.ModelSerializer):
 class ClientsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientsModels
-        fields=['pk', 'username', 'Gender', 'fullname', 'email', 'description', 'end',  'position', 'start', 'client_first_name', 'client_second_name', 'client_third_name', 'Birthdate', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'twitter_url',  'faceboo_url', 'instagram_url', 'Country_code', 'spark_url', 'pinterest_url', 'City', 'Country'] 
+        fields=['pk', 'username', 'Gender', 'fullname', 'company', 'email', 'description', 'end',  'position', 'start', 'company_profile',  'client_first_name', 'client_second_name', 'client_third_name', 'Birthdate', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'twitter_url',  'faceboo_url', 'instagram_url', 'Country_code', 'spark_url', 'pinterest_url', 'City', 'Country'] 
     
 
 class UserSerializer(serializers.ModelSerializer):
@@ -170,3 +213,7 @@ class UserSerializer(serializers.ModelSerializer):
         return value
 
 
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

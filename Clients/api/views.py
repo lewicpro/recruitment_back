@@ -40,6 +40,27 @@ class UserLoginAPIView(APIView):
 			return Response(new_data, status=HTTP_200_OK)
 		return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
+class TokenValidatorAPIView(APIView):
+	queryset = Voucher.objects.all()
+	permission_classes = [AllowAny]
+	def get(self, request, format=None):
+		passed = self.request.GET.get('token', None)
+		giv=Voucher.objects.filter(voucher_token__icontains=passed)
+		for m in giv:
+			context={
+			    'status':m.status
+			}
+			return Response(context, status=HTTP_200_OK)
+
+	# def post(self, request, *args, **kwargs):
+	# 	data = request.data
+	# 	serializer = UserLoginSerializer(data=data)
+	# 	if serializer.is_valid(raise_exception=True):
+	# 		# usere = serializer.validated_data['email']
+	# 		new_data = serializer.data
+	# 		return Response(new_data, status=HTTP_200_OK)
+	# 	return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
 
 class ClientView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -131,14 +152,16 @@ class Upadateview(generics.CreateAPIView, generics.ListAPIView):
 			Gender = serializer.validated_data['Gender']
 			Country_code = serializer.validated_data['Country_code']
 			Birthdate = serializer.validated_data['Birthdate']
-			# Mobile_number = serializer.validated_data['Mobile_number']
+			Mobile_number = serializer.validated_data['Mobile_number']
 			City = serializer.validated_data['City']
 			# logo = serializer.validated_data['logo']
 			Nationality = serializer.validated_data['Nationality']
+			company_profile = serializer.validated_data['company_profile']
 			Complete_address = serializer.validated_data['Complete_address']
+			Country = serializer.validated_data['Country']
 			# pregstration = serializer.validated_data['pregstration']
 
-			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Birthdate=Birthdate, Country_code=Country_code, City=City, Gender=Gender, Complete_address=Complete_address, Nationality=Nationality)
+			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Birthdate=Birthdate, Country_code=Country_code, City=City, Gender=Gender, Complete_address=Complete_address, Nationality=Nationality, company_profile=company_profile, Mobile_number=Mobile_number, Country=Country )
 
 			# mon = serializer.save()
 
@@ -170,7 +193,7 @@ class Job_requestsView(generics.CreateAPIView, generics.ListAPIView):
 			Mobile_number = serializer.validated_data['Mobile_number']
 			# Gender = serializer.validated_data['Gender']
 			Complete_address = serializer.validated_data['Complete_address']
-			# Country = serializer.validated_data['Country']
+			Country = serializer.validated_data['Country']
 			# Age = serializer.validated_data['Age']
 			Nationality = serializer.validated_data['Nationality']
 			Gender = serializer.validated_data['Gender']
@@ -183,7 +206,31 @@ class Job_requestsView(generics.CreateAPIView, generics.ListAPIView):
 			pinterest_url = serializer.validated_data['pinterest_url']
 			faceboo_url = serializer.validated_data['faceboo_url']
 
-			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Country_code=Country_code, Birthdate=Birthdate, Complete_address=Complete_address, Gender=Gender, Nationality=Nationality, City=City, faceboo_url=faceboo_url, instagram_url=instagram_url, spark_url=spark_url, twitter_url=twitter_url, pinterest_url=pinterest_url, Mobile_number=Mobile_number)
+			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Country_code=Country_code, Birthdate=Birthdate, Complete_address=Complete_address, Gender=Gender, Nationality=Nationality, City=City, faceboo_url=faceboo_url, instagram_url=instagram_url, spark_url=spark_url, twitter_url=twitter_url, pinterest_url=pinterest_url, Mobile_number=Mobile_number, Country=Country)
+			# mon = serializer.save()
+
+			return Response(serializer.validated_data)
+	
+
+class UpdatestatusView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = ApplyJobSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		return Applied.objects.all()
+
+	def post(self, request, *args, **kwargs):
+		data = request.data
+		username=self.kwargs['username']
+		pk=self.kwargs['pk']
+		serializer = ApplyJobSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+			company = serializer.validated_data['company']
+			status = serializer.validated_data['status']
+			# pk = serializer.validated_data['pk']
+			moxt=Applied.objects.filter(pk=pk).update(status=status)
 			# mon = serializer.save()
 
 			return Response(serializer.validated_data)
@@ -196,22 +243,19 @@ class uploadprofileView(generics.CreateAPIView, generics.ListAPIView):
 
 
 	def get_queryset(self):
-		return Job_requests.objects.all()
+		return ClientsModels.objects.all()
 
 	def post(self, request, *args, **kwargs):
 		data = request.data
 		username=self.kwargs['username']
 		serializer = ClientsSerializer(data=data)
 		if serializer.is_valid(raise_exception=True):
-	
 			username = serializer.validated_data['username']
 			Client_profile = serializer.validated_data['Client_profile']
 		
-
+			# print(contents)
 			moxt=ClientsModels.objects.filter(username=username).update(Client_profile=Client_profile)
-			# mon = serializer.save()
-
-			return Response(serializer.validated_data)
+			return Response(status=204)
 	
 
 
@@ -233,6 +277,9 @@ class CVView(generics.CreateAPIView, generics.ListAPIView):
 	def get_queryset(self):
 		return CV.objects.all()
 
+
+	
+
 class Job_PostsView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
 	serializer_class = Job_PostsSerializer
@@ -240,7 +287,40 @@ class Job_PostsView(generics.CreateAPIView, generics.ListAPIView):
 
 
 	def get_queryset(self):
+		company=self.kwargs['company']
+		return Job_Posts.objects.filter(company=company)
+
+
+class Job_Posts1View(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = Job_PostsSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		# compay=self.kwargs['company']
 		return Job_Posts.objects.all()
+
+class JobDetailsview(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = Job_PostsSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		pk=self.kwargs['pk']
+		return Job_Posts.objects.filter(pk=pk)
+
+
+class jobapplictionsView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = ApplyJobSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		pk=self.kwargs['pk']
+		return Applied.objects.filter(pk=pk)
 
 class jobposthomeView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -251,7 +331,7 @@ class jobposthomeView(generics.CreateAPIView, generics.ListAPIView):
 
 
 	def get_queryset(self):
-		return Job_Posts.objects.all()
+		return Job_Posts.objects.all().order_by('-pk')
 
 class getalljobsView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -290,6 +370,51 @@ class ApplyJobview(generics.CreateAPIView, generics.ListAPIView):
 			mon = serializer.save()
 			return Response(serializer.validated_data)
 
+class CategoryView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = CategorySerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		user=self.kwargs['username']
+		return categories.objects.all()
+
+
+class AppliedJobview(generics.CreateAPIView, generics.ListAPIView):
+    	
+	lookup_field = 'pk'
+	serializer_class = ApplyJobSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		company=self.kwargs['company']
+		return Applied.objects.filter(company=company)
+
+class CompanyProfileView(generics.CreateAPIView, generics.ListAPIView):
+    	
+	lookup_field = 'pk'
+	serializer_class = CompanyProfileSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		company=self.kwargs['company']
+		return Company.objects.filter(company=company)
+			
+class ClientProfileView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class =ClientProfileSerializers
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		username=self.kwargs['username']
+		return Client_profile.objects.filter(username=username)
+
+
+
 class Deleteview(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
 	serializer_class = DeleteSerializer
@@ -318,6 +443,9 @@ class Deleteview(generics.CreateAPIView, generics.ListAPIView):
 				mboma.delete()
 			if action=='expertise':
 				mboma= ExperienceModels.objects.get(pk=pks)
+				mboma.delete()
+			if action=='postjob':
+				mboma= Job_Posts.objects.get(pk=pks)
 				mboma.delete()
 			if action=='Certificate':
 				mboma= CV.objects.get(pk=pks)
@@ -373,3 +501,49 @@ class GetclientdataView( generics.ListAPIView):
 		username=self.kwargs['username']
 		snippets = ClientsModels.objects.filter(username=username)
 		return snippets
+
+class searchedView( generics.ListAPIView):
+	# queryset = Job_Posts.objects.all()
+	serializer_class=Job_PostsSerializer
+	permission_classes = [AllowAny]
+	
+	def get_queryset(self):
+		keyword=self.kwargs['keyword']
+		snippets = Job_Posts.objects.filter(title__icontains=keyword)
+		return snippets
+
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+        """
+        An endpoint for changing password.
+        """
+        serializer_class = ChangePasswordSerializer
+        model = User
+        permission_classes = [IsAuthenticated,]
+
+        def get_object(self, queryset=None):
+            obj = self.request.user
+            return obj
+
+        def update(self, request, *args, **kwargs):
+            self.object = self.get_object()
+            serializer = self.get_serializer(data=request.data)
+
+            if serializer.is_valid():
+                # Check old password
+                if not self.object.check_password(serializer.data.get("old_password")):
+                    return Response({"old_password": ["Wrong password."]}, status=HTTP_400_BAD_REQUEST)
+                # set_password also hashes the password that the user will get
+                self.object.set_password(serializer.data.get("new_password"))
+                self.object.save()
+                response = {
+                    'status': 'success',
+                    'code': HTTP_200_OK,
+                    'message': 'Password updated successfully',
+                    'data': []
+                }
+
+                return Response(response)
+
+            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
