@@ -234,7 +234,7 @@ class Voucher(models.Model):
     
 
 def account_generator(size=8, chars=string.digits):
-    account = 'http://localhost:4200/regcompany/?token=SPK' + ''
+    account = 'https://sparkrecruitment.co.tz/regcompany/?token=SPK' + ''
     for _ in range(size):
         account += random.choice(chars)
     return account
