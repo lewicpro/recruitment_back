@@ -69,7 +69,27 @@ class ClientView(generics.CreateAPIView, generics.ListAPIView):
 
 
 	def get_queryset(self):
+		# giv=Voucher.objects.filter(voucher_token__icontains=passed)
 		return ClientsModels.objects.all()
+	
+	def post(self, request, *args, **kwargs):
+		data = request.data
+		username= self.kwargs["username"]
+		serializer = ClientsSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+
+			Nationality = serializer.validated_data['Nationality']
+			company_profile = serializer.validated_data['company_profile']
+			Complete_address = serializer.validated_data['Complete_address']
+			Country = serializer.validated_data['Country']
+	
+
+			moxt=ClientsModels.objects.filter(username=username).update(client_first_name=client_first_name, client_second_name=client_second_name, client_third_name=client_third_name, Birthdate=Birthdate, Country_code=Country_code, City=City, Gender=Gender, Complete_address=Complete_address, Nationality=Nationality, company_profile=company_profile, Mobile_number=Mobile_number, Country=Country )
+
+			# mon = serializer.save()
+
+			
+			return Response(serializer.validated_data)
 
 class qualifaicationView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -275,7 +295,8 @@ class CVView(generics.CreateAPIView, generics.ListAPIView):
 
 
 	def get_queryset(self):
-		return CV.objects.all()
+		user=self.kwargs['username']
+		return CV.objects.filter(user=user)
 
 
 	
