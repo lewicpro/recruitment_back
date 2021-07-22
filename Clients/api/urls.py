@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^checktoken/$', TokenValidatorAPIView.as_view(), name='hgv'),
     url(r'^jobpost/(?P<company>.+)/$', Job_PostsView.as_view(), name='data'),
     url(r'^clientcreate/$', ClientView.as_view(), name='data'),
+    url(r'^clientcreate1/$', ClientView1.as_view(), name='data'),
     url(r'^clientsdata/(?P<username>.+)/$', GetclientdataView.as_view(), name='data'),
     url(r'^qualifaication/(?P<username>.+)/$', qualifaicationView.as_view(), name='data'),
     url(r'^skills/(?P<username>.+)/$', SkillsView.as_view(), name='data'),
