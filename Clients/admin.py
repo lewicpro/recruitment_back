@@ -30,9 +30,9 @@ class CompanyProfileAdmin(admin.ModelAdmin):
     officer_added.short_description = 'Date adde'
     
 class AppliedAdmin(admin.ModelAdmin):
-    search_fields = ('Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'Age_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',
+    search_fields = ('Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',
             )
-    list_display=['Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'Age_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',]
+    list_display=['Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',]
 class DeletedAdmin(admin.ModelAdmin):
     search_fields = ('pk', 'Date_deleted', 'Section', 'Person_deleted',  'Heading_thread', 'company', 'officer',
             )
