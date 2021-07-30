@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/Jobs/', include('Clients.api.urls', namespace='Jobs'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+admin.site.site_title = "ADMIN"
 admin.site.site_header ="SPARK RECRUITMENT ADMIN"
-admin.site.index_title = "SPARK"
+admin.site.index_title = "SPARK RECRUITMENT"

@@ -23,6 +23,8 @@ from rest_framework_simplejwt.views import (
 )
 
 app_name = 'Clients'
+
+
 urlpatterns = [
     url('toke_pro/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     url(r'token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
