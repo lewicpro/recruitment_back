@@ -424,6 +424,17 @@ class CategoryView(generics.CreateAPIView, generics.ListAPIView):
 		return categories.objects.all()
 
 
+class CompanybioView(generics.CreateAPIView, generics.ListAPIView):
+    	
+	lookup_field = 'pk'
+	serializer_class = ClientsSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		user=self.kwargs['username']
+		return ClientsModels.objects.filter(username=user)
+
 class AppliedJobview(generics.CreateAPIView, generics.ListAPIView):
     	
 	lookup_field = 'pk'
