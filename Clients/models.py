@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import random, string
+from django.template.defaultfilters import truncatechars
 
 
 class Job_requests(models.Model):
@@ -79,6 +80,12 @@ class Applied(models.Model):
     end=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
         verbose_name_plural = "Applications"
+
+
+    
+    @property
+    def short_description(self):
+        return truncatechars(self.description, 35)
 
 class Deleted(models.Model):
     Date_deleted=models.CharField(max_length=120, blank=True, null=True)

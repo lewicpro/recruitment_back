@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 
+
 # Register your models here.
 class Job_RequestsAdmin(admin.ModelAdmin):
     search_fields = ('client_first_name', 'client_third_name', 'Mobile_number', 'Age', 'City', 'Job_seeking'
@@ -30,9 +31,10 @@ class CompanyProfileAdmin(admin.ModelAdmin):
     officer_added.short_description = 'Date adde'
     
 class AppliedAdmin(admin.ModelAdmin):
-    search_fields = ('Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',
+    search_fields = ('Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title',
             )
-    list_display=['Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'company', 'category', 'officer_posted', 'description', 'start', 'end', 'title', 'start',]
+    list_display=['Date_applied', 'Job_title', 'applicant_username',  'name_of_applicant', 'company', 'category', 'short_description', 'start', 'end', 'title',]
+    # short_description=['description']
 class DeletedAdmin(admin.ModelAdmin):
     search_fields = ('pk', 'Date_deleted', 'Section', 'Person_deleted',  'Heading_thread', 'company', 'officer',
             )
@@ -86,7 +88,7 @@ class PackagesAdmin(admin.ModelAdmin):
     list_display=('dateaded', 'package', 'company', 'timeframe', 'fullname', 'percentage', 'status', )
     readonly_fields = ('company', )   
 
-admin.site.register(Job_requests, Job_RequestsAdmin)
+# admin.site.register(Job_requests, Job_RequestsAdmin)
 admin.site.register(Job_Posts, Job_PostsAdmin)
 admin.site.register(ClientsModels, ClientsAdmin)
 admin.site.register(QualificationModels, QualificationAdmin)
