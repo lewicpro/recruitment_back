@@ -104,7 +104,7 @@ class ClientsModels(models.Model):
     email=models.CharField(max_length=120, blank=True, null=True)
     fullname=models.CharField(max_length=120, blank=True, null=True)
     password=models.CharField(max_length=120, blank=True, null=True)
-    description=models.CharField(max_length=120, blank=True, null=True)
+    description=models.CharField(max_length=920, blank=True, null=True)
     start=models.CharField(max_length=120, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
     client_first_name=models.CharField(max_length=120, blank=True, null=True)
@@ -132,7 +132,7 @@ class ClientsModels(models.Model):
     Linkedin=models.CharField(max_length=120, blank=True, null=True)
     twitter_url=models.CharField(max_length=120, blank=True, null=True)
     pinterest_url=models.CharField(max_length=120, blank=True, null=True)
-    company_profile=models.CharField(max_length=120, blank=True, null=True)
+    company_profile=models.CharField(max_length=920, blank=True, null=True)
     logo=models.FileField(blank=True, null=True)
     class Meta:
         verbose_name_plural = "List of clients"
