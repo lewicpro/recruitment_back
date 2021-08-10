@@ -31,14 +31,14 @@ class Job_requests(models.Model):
         verbose_name_plural = "Jobs"
 
 class Job_Posts(models.Model):
-    Qualification=models.CharField(max_length=120, blank=True, null=True)
+    Qualification=models.TextField(blank=True, default=True)
     company=models.CharField(max_length=120, blank=True, null=True)
     workexperience=models.CharField(max_length=120, blank=True, null=True)
     experience=models.CharField(max_length=120, blank=True, null=True)
     category=models.CharField(max_length=120, blank=True, null=True)
     officer=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
-    description=models.CharField(max_length=120, blank=True, null=True)
+    description=models.TextField(blank=True, default=True)
     start=models.CharField(max_length=120, blank=True, null=True)
     location=models.CharField(max_length=120, blank=True, null=True)
     Gender=models.CharField(max_length=120, blank=True, null=True)
@@ -61,7 +61,7 @@ class categories(models.Model):
 class Applied(models.Model):
     Date_applied=models.CharField(max_length=120, blank=True, null=True)
     Job_title=models.CharField(max_length=120, blank=True, null=True)
-    Qualification=models.CharField(max_length=120, blank=True, null=True)
+    Qualification=models.TextField(blank=True, default=True)
     applicant_username=models.CharField(max_length=120, blank=True, null=True)
     name_of_applicant=models.CharField(max_length=120, blank=True, null=True)
     Age_of_applicant=models.CharField(max_length=120, blank=True, null=True)
@@ -74,7 +74,7 @@ class Applied(models.Model):
     start=models.CharField(max_length=120, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
-    description=models.CharField(max_length=120, blank=True, null=True)
+    description=models.TextField(blank=True, default=True)
     workexperience=models.CharField(max_length=120, blank=True, null=True)
     experience=models.CharField(max_length=120, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
@@ -104,7 +104,7 @@ class ClientsModels(models.Model):
     email=models.CharField(max_length=120, blank=True, null=True)
     fullname=models.CharField(max_length=120, blank=True, null=True)
     password=models.CharField(max_length=120, blank=True, null=True)
-    description=models.CharField(max_length=920, blank=True, null=True)
+    description=models.TextField(blank=True, default=True)
     start=models.CharField(max_length=120, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
     client_first_name=models.CharField(max_length=120, blank=True, null=True)
@@ -141,7 +141,7 @@ class ClientsModels(models.Model):
 class QualificationModels(models.Model):
     user = models.CharField(max_length=120, null=True)
     company=models.CharField(max_length=120, blank=True, null=True)
-    Qualification=models.CharField(max_length=120, blank=True, null=True)
+    Qualification=models.TextField(blank=True, default=True)
     fromeducation=models.CharField(max_length=120, blank=True, null=True)
     toeducation=models.CharField(max_length=120, blank=True, null=True)
     university_education=models.CharField(max_length=120, blank=True, null=True)
@@ -194,7 +194,7 @@ class Packages(models.Model):
     fullname=models.CharField(max_length=120, blank=True, null=True)
     timeframe=models.CharField(max_length=120, blank=True, null=True)
     percentage=models.CharField(max_length=120, blank=True, null=True)
-    Description=models.CharField(max_length=120, blank=True, default='Active')
+    Description=models.TextField(blank=True, default=True)
     status=models.CharField(max_length=120, blank=True, default='Active')
 
     

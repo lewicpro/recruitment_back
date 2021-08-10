@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     'Clients',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'jazzmin',
     'django.contrib.admin',
