@@ -331,7 +331,7 @@ class Job_PostsView(generics.CreateAPIView, generics.ListAPIView):
 
 	def get_queryset(self):
 		company=self.kwargs['company']
-		return Job_Posts.objects.filter(company=company)
+		return Job_Posts.objects.all()
 
 
 class Job_Posts1View(generics.CreateAPIView, generics.ListAPIView):
