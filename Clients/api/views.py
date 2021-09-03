@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 import os
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 import json
@@ -111,6 +112,17 @@ class ClientView1(generics.CreateAPIView, generics.ListAPIView):
 	def get_queryset(self):
 		# giv=Voucher.objects.filter(voucher_token__icontains=passed)
 		return ClientsModels.objects.all()
+
+	def post(self, request, *args, **kwargs):
+		data = request.data
+		serializer = ClientsSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+			token = serializer.validated_data['token']
+			company = serializer.validated_data['company']
+			email = serializer.validated_data['email']
+			update= Voucher.objects.filter(voucher_token=token).update(status='used')
+			Company.objects.create(company_name=company, officer_added=email)
+			return Response(serializer.validated_data)
 	
 
 class qualifaicationView(generics.CreateAPIView, generics.ListAPIView):
@@ -366,15 +378,26 @@ class jobapplictionsView(generics.CreateAPIView, generics.ListAPIView):
 		return Applied.objects.filter(pk=pk)
 
 class jobposthomeView(generics.CreateAPIView, generics.ListAPIView):
-	lookup_field = 'pk'
-	serializer_class = Job_PostsSerializer
-	permission_classes = [AllowAny]
-	pagination_class = PostPageNumberPagination
+		lookup_field = 'pk'
+		serializer_class = Job_PostsSerializer
+		permission_classes = [AllowAny]
+		pagination_class = PostPageNumberPagination
 	
 
 
-	def get_queryset(self):
-		return Job_Posts.objects.all().order_by('-pk')
+		def get_queryset(self):
+			return Job_Posts.objects.all().order_by('-pk')
+class searchjobsView(generics.CreateAPIView, generics.ListAPIView):
+		lookup_field = 'pk'
+		serializer_class = Job_PostsSerializer
+		permission_classes = [AllowAny]
+		pagination_class = PostPageNumberPagination
+		
+
+
+		def get_queryset(self):
+			category=self.kwargs['category']
+			return Job_Posts.objects.filter(category=category).order_by('-pk')
 
 class getalljobsView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -567,7 +590,6 @@ class searchedView( generics.ListAPIView):
 		return snippets
 
 
-
 class ChangePasswordView(generics.UpdateAPIView):
         """
         An endpoint for changing password.
@@ -601,3 +623,14 @@ class ChangePasswordView(generics.UpdateAPIView):
                 return Response(response)
 
             return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+class EmployeeViewSet(generics.ListAPIView):
+		serializer_class = UserSerializerRetrieve
+		
+		def get_queryset(self):
+			goal=self.kwargs['goal']
+			status=self.kwargs['status']
+
+			if status=='username':
+    			 return User.objects.filter(username=goal)
+			if status=='email':
+				 return User.objects.filter(email=goal)

@@ -120,6 +120,7 @@ class ClientsModels(models.Model):
     Complete_address=models.CharField(max_length=120, blank=True, null=True)
     Age=models.CharField(max_length=120, blank=True, null=True)
     Nationality=models.CharField(max_length=120, blank=True, null=True)
+    token=models.CharField(max_length=120, blank=True, null=True)
     position=models.CharField(max_length=120, blank=True, null=True)
     City=models.CharField(max_length=120, blank=True, null=True)
     upload_cv=models.CharField(max_length=120, blank=True, null=True)

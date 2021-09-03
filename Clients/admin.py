@@ -19,13 +19,13 @@ class QualificationAdmin(admin.ModelAdmin):
     list_display=['user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',]
     readonly_fields = ('company', )   
 class ClientProfileAdmin(admin.ModelAdmin):
-    search_fields = ('date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',
-            )
+    search_fields = ('date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',)
     list_display=['date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',]
+    list_filter = ('username',)
 class CompanyProfileAdmin(admin.ModelAdmin):
-    search_fields = ('date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',
+    search_fields = ( 'company_name', 'officer_added', 'profile_photo', 'bio',
             )
-    list_display=['date_added', 'company_name', 'officer_added', 'profile_photo', 'bio',]
+    list_display=['company_name', 'officer_added', 'profile_photo', 'bio',]
     def officer_added(self, obj):
         return obj.get_full_name()
     officer_added.short_description = 'Date adde'
@@ -71,10 +71,11 @@ class CVAdmin(admin.ModelAdmin):
     readonly_fields = ('company', )   
 
 class ClientsAdmin(admin.ModelAdmin):
-    search_fields = ['username', 'fullname',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url', ]
+    search_fields = ['username', 'fullname', 'token', 'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url', ]
             
-    list_display=['username', 'fullname',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
-    readonly_fields = ('company', )   
+    list_display=['username', 'fullname', 'token',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
+    readonly_fields = ('company', )
+    list_filter = ('position',)
 class ExperienceAdmin(admin.ModelAdmin):
     search_fields = ['user', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
             

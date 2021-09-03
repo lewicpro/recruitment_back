@@ -3,6 +3,7 @@ from ..models import *
 from django.contrib.auth import get_user_model
 from rest_framework.serializers import CharField, EmailField, ValidationError, SerializerMethodField
 from django.db.models import Q
+from rest_auth.serializers import UserDetailsSerializer
 User = get_user_model()
 
 
@@ -173,7 +174,7 @@ class DeleteSerializer(serializers.ModelSerializer):
 class ClientsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientsModels
-        fields=['pk', 'username', 'Gender', 'fullname', 'company', 'email', 'description', 'end',  'position', 'start', 'company_profile',  'client_first_name', 'client_second_name', 'client_third_name', 'Birthdate', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'twitter_url',  'faceboo_url', 'instagram_url', 'Country_code', 'spark_url', 'pinterest_url', 'City', 'Country'] 
+        fields=['pk', 'username', 'Gender',  'token', 'fullname', 'company', 'email', 'description', 'end',  'position', 'start', 'company_profile',  'client_first_name', 'client_second_name', 'client_third_name', 'Birthdate', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'twitter_url',  'faceboo_url', 'instagram_url', 'Country_code', 'spark_url', 'pinterest_url', 'City', 'Country'] 
     
 
 class UserSerializer(serializers.ModelSerializer):
@@ -211,6 +212,15 @@ class UserSerializer(serializers.ModelSerializer):
         if password != password2:
             raise ValidationError('passwords must be the same')
         return value
+
+class UserSerializerRetrieve(UserDetailsSerializer):
+    class Meta:
+        model =User
+        fields = '__all__'
+        # fields = ['username', 'email']
+
+    # def get_employees(self, obj):
+    #     return obj.userprofile.employees.all()
 
 
 class ChangePasswordSerializer(serializers.Serializer):
