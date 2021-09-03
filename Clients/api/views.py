@@ -123,7 +123,14 @@ class ClientView1(generics.CreateAPIView, generics.ListAPIView):
 			update= Voucher.objects.filter(voucher_token=token).update(status='used')
 			Company.objects.create(company_name=company, officer_added=email)
 			return Response(serializer.validated_data)
-	
+
+class ClientViewnormaluser(generics.CreateAPIView, generics.ListAPIView):
+        lookup_field = 'pk'
+        serializer_class = ClientsSerializer
+        permission_classes = [AllowAny]
+
+        def get_queryset(self):
+                return ClientsModels.objects.all()
 
 class qualifaicationView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
