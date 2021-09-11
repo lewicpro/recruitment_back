@@ -105,6 +105,10 @@ class  PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Packages
         fields=['pk', 'dateaded', 'user', 'package', 'company', 'timeframe', 'fullname', 'percentage', 'status', ]
+class  EmailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Emails
+        fields=['pk', 'email', 'date', 'user','content', 'subject', ]
 
 class Job_PostsSerializer(serializers.ModelSerializer):
     class Meta:

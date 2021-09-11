@@ -57,6 +57,15 @@ class categories(models.Model):
     category=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
         verbose_name_plural = "Categories"
+class Emails(models.Model):
+    date=models.CharField(max_length=120, blank=True, null=True)
+    user=models.CharField(max_length=120, blank=True, null=True)
+    email=models.CharField(max_length=120, blank=True, null=True)
+    company=models.CharField(max_length=120, blank=True, null=True)
+    content=models.CharField(max_length=120, blank=True, null=True)
+    subject=models.TextField(blank=True, null=True)
+    class Meta:
+        verbose_name_plural = "Emails"
 
 class Applied(models.Model):
     Date_applied=models.CharField(max_length=120, blank=True, null=True)

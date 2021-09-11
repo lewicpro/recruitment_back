@@ -14,7 +14,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 import json
-
+from django.conf import settings
+from django.core.mail import send_mail
 
 class CreateUserView(generics.CreateAPIView):
 	model = get_user_model()
@@ -475,6 +476,35 @@ class AppliedJobview(generics.CreateAPIView, generics.ListAPIView):
 	def get_queryset(self):
 		company=self.kwargs['company']
 		return Applied.objects.filter(company=company)
+class EmailsView(generics.CreateAPIView, generics.ListAPIView):
+    	
+	lookup_field = 'pk'
+	serializer_class = EmailsSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		return Emails.objects.all()
+
+	def post(self, request, *args, **kwargs):
+		data = request.data
+		serializer = EmailsSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+    		# subject = 'Withdraw confirmed'
+			# message = 'we will be depositing your cash ( %s usd) within 24 hours' % user.m_amount
+			email = serializer.validated_data['email']
+			from_email = settings.EMAIL_HOST_USER
+			to_list = [email]
+			print(from_email)
+			print(to_list)
+			send_mail('Sent from Spark', 'Welcome to the Spark recruitment portal', from_email, to_list, fail_silently=True)
+			mon = serializer.save()
+			return Response(serializer.validated_data)
+    	
+    		
+
+			
+			
 
 class CompanyProfileView(generics.CreateAPIView, generics.ListAPIView):
     	
@@ -593,8 +623,14 @@ class searchedView( generics.ListAPIView):
 	
 	def get_queryset(self):
 		keyword=self.kwargs['keyword']
-		snippets = Job_Posts.objects.filter(title__icontains=keyword)
-		return snippets
+		mkoa=self.kwargs['mkoa']
+		if mkoa=='all':
+			snippets = Job_Posts.objects.filter(title__icontains=keyword)
+			return snippets
+		else:
+			snippets = Job_Posts.objects.filter(title__icontains=keyword, location__icontains=mkoa)
+			return snippets
+    		
 
 
 class ChangePasswordView(generics.UpdateAPIView):

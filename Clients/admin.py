@@ -48,16 +48,10 @@ class SkillsAdmin(admin.ModelAdmin):
 class VoucherAdmin(admin.ModelAdmin):
     search_fields = ('voucher_token', 'username', 'company_name',)
     list_display=['voucher_token', 'username', 'company_name', 'status',]
+class EmailsAdmin(admin.ModelAdmin):
+    search_fields = ('email', 'date', 'user','content', 'subject',)
+    list_display=['email', 'date', 'user','content', 'subject',]
 
-    # def has_change_permission(self, request, obj=None):
-    #     if obj is not None and obj.voucher_token:
-    #         return False
-    #     return super().has_change_permission(request, obj=obj)
-
-    # def get_readonly_fields(self, request, obj=None):
-    #     if obj is None:
-    #         return ['voucher_token']
-    #     return ['voucher_token']
 
 class categoriesAdmin(admin.ModelAdmin):
     search_fields = ('date', 'user', 'company', 'category',)
@@ -103,3 +97,4 @@ admin.site.register(Applied, AppliedAdmin)
 # admin.site.register(Deleted, DeletedAdmin)
 admin.site.register(Client_profile, ClientProfileAdmin)
 admin.site.register(Company, CompanyProfileAdmin)
+admin.site.register(Emails, EmailsAdmin)

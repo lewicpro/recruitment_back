@@ -165,6 +165,23 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+#gmail_send/settings.py
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'recruitmentporta@gmail.com'
+# EMAIL_HOST_PASSWORD = 'spark@2021' #past the key or password app here
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'Hello'
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'recruitmentporta@gmail.com'
+EMAIL_HOST_PASSWORD = 'rdvshqzabsacadib'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'recruitmentporta@gmail.com'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
