@@ -120,9 +120,15 @@ class ClientView1(generics.CreateAPIView, generics.ListAPIView):
 		if serializer.is_valid(raise_exception=True):
 			token = serializer.validated_data['token']
 			company = serializer.validated_data['company']
+			username = serializer.validated_data['username']
+			fullname = serializer.validated_data['fullname']
+			# password = serializer.validated_data['password']
+			Nationality = serializer.validated_data['Nationality']
 			email = serializer.validated_data['email']
+			position = serializer.validated_data['position']
 			update= Voucher.objects.filter(voucher_token=token).update(status='used')
 			Company.objects.create(company_name=company, officer_added=email)
+			ClientsModels.objects.create(position=position, username=username, company=company, Nationality=Nationality, email=email, fullname=fullname)
 			return Response(serializer.validated_data)
 
 class ClientViewnormaluser(generics.CreateAPIView, generics.ListAPIView):
