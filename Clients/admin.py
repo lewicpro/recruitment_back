@@ -43,7 +43,7 @@ class DeletedAdmin(admin.ModelAdmin):
 class SkillsAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromskill', 'toskill', 'company_attended',
             )
-    list_display=['user', 'company', 'fromskill', 'toskill', 'company_attended',]
+    list_display=['user', 'fromskill', 'toskill', 'company_attended',]
     readonly_fields = ('company', )   
 class VoucherAdmin(admin.ModelAdmin):
     search_fields = ('voucher_token', 'username', 'company_name',)
@@ -61,19 +61,19 @@ class categoriesAdmin(admin.ModelAdmin):
 class CVAdmin(admin.ModelAdmin):
     search_fields = ('dateaded', 'fullname',  'company', 'cvtittle', 'cvfile', 'status',
             )
-    list_display=['dateaded', 'fullname',  'company', 'cvtittle', 'cvfile', 'status']
+    list_display=['dateaded', 'fullname', 'cvtittle', 'cvfile', 'status']
     readonly_fields = ('company', )   
 
 class ClientsAdmin(admin.ModelAdmin):
     search_fields = ['username', 'fullname', 'token', 'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url', ]
             
-    list_display=['username', 'fullname', 'token',  'position', 'company', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
+    list_display=['username', 'fullname', 'token',  'position', 'description', 'end', 'client_second_name', 'Country_code', 'Client_profile', 'Mobile_number', 'Complete_address', 'Nationality', 'upload_cv', 'Age', 'faceboo_url', 'spark_url', 'pinterest_url',]
     readonly_fields = ('company', )
     list_filter = ('position',)
 class ExperienceAdmin(admin.ModelAdmin):
-    search_fields = ['user', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
+    search_fields = ['user','role', 'from_date', 'to_date', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
             
-    list_display=['user', 'company', 'skillsexperience', 'Levelexperience', 'status',]
+    list_display=['user','role', 'from_date', 'to_date', 'skillsexperience', 'Levelexperience', 'status',]
     readonly_fields = ('company', )   
 
 

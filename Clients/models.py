@@ -175,8 +175,12 @@ class SkillsModels(models.Model):
 class ExperienceModels(models.Model):
     user = models.CharField(max_length=120, null=True)
     company=models.CharField(max_length=120, blank=True, null=True)
+    company_attended=models.CharField(max_length=120, blank=True, null=True)
     skillsexperience=models.CharField(max_length=120, blank=True, null=True)
     Levelexperience=models.CharField(max_length=120, blank=True, null=True)
+    role=models.CharField(max_length=120, blank=True, null=True)
+    from_date=models.CharField(max_length=120, blank=True, null=True)
+    to_date=models.CharField(max_length=120, blank=True, null=True)
     status=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
         verbose_name_plural = "Experience"
