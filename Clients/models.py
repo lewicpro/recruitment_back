@@ -33,8 +33,8 @@ class Job_requests(models.Model):
 class Job_Posts(models.Model):
     Qualification=models.TextField(blank=True, default=True)
     company=models.CharField(max_length=120, blank=True, null=True)
-    workexperience=models.CharField(max_length=120, blank=True, null=True)
-    experience=models.CharField(max_length=120, blank=True, null=True)
+    workexperience=models.TextField(blank=True, null=True)
+    experience=models.TextField(blank=True, null=True)
     category=models.CharField(max_length=120, blank=True, null=True)
     officer=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
@@ -167,6 +167,7 @@ class SkillsModels(models.Model):
     fromskill=models.CharField(max_length=120, blank=True, null=True)
     toskill=models.CharField(max_length=120, blank=True, null=True)
     company_attended=models.CharField(max_length=120, blank=True, null=True)
+    title=models.CharField(max_length=120, blank=True, null=True)
     status=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
         verbose_name_plural = "Skills"
@@ -180,6 +181,7 @@ class ExperienceModels(models.Model):
     Levelexperience=models.CharField(max_length=120, blank=True, null=True)
     role=models.CharField(max_length=120, blank=True, null=True)
     from_date=models.CharField(max_length=120, blank=True, null=True)
+    title=models.CharField(max_length=120, blank=True, null=True)
     to_date=models.CharField(max_length=120, blank=True, null=True)
     status=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
@@ -217,7 +219,7 @@ class Company(models.Model):
     company_name =models.CharField(max_length=120, blank=True, null=True)
     officer_added = models.CharField(max_length=120, blank=True, null=True)
     profile_photo =models.CharField(max_length=120, blank=True, null=True)
-    bio =models.CharField(max_length=120, blank=True, null=True)
+    bio =models.TextField(blank=True, null=True)
     class Meta:
         verbose_name_plural = "Companies"
 
@@ -228,9 +230,9 @@ class Client_profile(models.Model):
     officer_name = models.CharField(max_length=120, blank=True, null=True)
     possition = models.CharField(max_length=120, blank=True, null=True)
     profile_photo =models.FileField(blank=True, null=True)
-    bio=models.CharField(max_length=120, blank=True, null=True)
+    bio =models.TextField(blank=True, null=True)
     class Meta:
-        verbose_name_plural = "Client profiles"
+        verbose_name_plural = "Candidate profiles"
 
 
 used = 'used'

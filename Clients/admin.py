@@ -23,9 +23,9 @@ class ClientProfileAdmin(admin.ModelAdmin):
     list_display=['date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',]
     list_filter = ('username',)
 class CompanyProfileAdmin(admin.ModelAdmin):
-    search_fields = ( 'company_name', 'officer_added', 'profile_photo', 'bio',
+    search_fields = ( 'company_name', 'officer_added',
             )
-    list_display=['company_name', 'officer_added', 'profile_photo', 'bio',]
+    list_display=['company_name', 'officer_added',]
     def officer_added(self, obj):
         return obj.get_full_name()
     officer_added.short_description = 'Date adde'
@@ -73,7 +73,7 @@ class ClientsAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     search_fields = ['user','role', 'from_date', 'to_date', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
             
-    list_display=['user','role', 'from_date', 'to_date', 'skillsexperience', 'Levelexperience', 'status',]
+    list_display=['user','role', 'from_date', 'to_date', 'skillsexperience', 'title', 'Levelexperience',]
     readonly_fields = ('company', )   
 
 
