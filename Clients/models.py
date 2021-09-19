@@ -84,7 +84,7 @@ class Applied(models.Model):
     end=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
     description=models.TextField(blank=True, default=True)
-    workexperience=models.CharField(max_length=120, blank=True, null=True)
+    workexperience=models.TextField(blank=True, null=True)
     experience=models.CharField(max_length=120, blank=True, null=True)
     end=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
@@ -122,7 +122,6 @@ class ClientsModels(models.Model):
     Country_code=models.CharField(max_length=120, blank=True, null=True)
     Birthdate=models.CharField(max_length=120, blank=True, null=True)
     Client_profile=models.FileField(blank=True, null=True)
-    # Email=models.CharField(max_length=120, blank=True, null=True)
     Mobile_number=models.CharField(max_length=120, blank=True, null=True)
     Gender=models.CharField(max_length=120, blank=True, null=True)
     Country=models.CharField(max_length=120, blank=True, null=True)
@@ -145,7 +144,7 @@ class ClientsModels(models.Model):
     company_profile=models.CharField(max_length=920, blank=True, null=True)
     logo=models.FileField(blank=True, null=True)
     class Meta:
-        verbose_name_plural = "List of clients"
+        verbose_name_plural = "List of clients & Candidates"
 
 
 class QualificationModels(models.Model):
@@ -165,12 +164,13 @@ class SkillsModels(models.Model):
     company=models.CharField(max_length=120, blank=True, null=True)
     skill=models.CharField(max_length=120, blank=True, null=True)
     fromskill=models.CharField(max_length=120, blank=True, null=True)
+    role=models.CharField(max_length=120, blank=True, null=True)
     toskill=models.CharField(max_length=120, blank=True, null=True)
     company_attended=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
     status=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
-        verbose_name_plural = "Skills"
+        verbose_name_plural = "Experience"
 
     
 class ExperienceModels(models.Model):
@@ -185,7 +185,7 @@ class ExperienceModels(models.Model):
     to_date=models.CharField(max_length=120, blank=True, null=True)
     status=models.CharField(max_length=120, blank=True, null=True)
     class Meta:
-        verbose_name_plural = "Experience"
+        verbose_name_plural = "Skills"
 
     
 class CV(models.Model):

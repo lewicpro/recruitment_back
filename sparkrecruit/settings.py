@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'Clients',
+    'django_filters',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',

@@ -41,9 +41,9 @@ class DeletedAdmin(admin.ModelAdmin):
     list_display=['pk', 'Date_deleted', 'Section', 'Person_deleted',  'Heading_thread', 'company', 'officer',]
 
 class SkillsAdmin(admin.ModelAdmin):
-    search_fields = ('user', 'company', 'fromskill', 'toskill', 'company_attended',
+    search_fields = ('user', 'company', 'role', 'fromskill', 'toskill', 'company_attended',
             )
-    list_display=['user', 'fromskill', 'toskill', 'company_attended',]
+    list_display=['user', 'fromskill', 'role', 'toskill', 'company_attended',]
     readonly_fields = ('company', )   
 class VoucherAdmin(admin.ModelAdmin):
     search_fields = ('voucher_token', 'username', 'company_name',)

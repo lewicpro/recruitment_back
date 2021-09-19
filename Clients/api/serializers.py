@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.serializers import CharField, EmailField, ValidationError, SerializerMethodField
 from django.db.models import Q
 from rest_auth.serializers import UserDetailsSerializer
+import django_filters
 User = get_user_model()
 
 
@@ -85,7 +86,7 @@ class QualificationSerializer(serializers.ModelSerializer):
 class SkillsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SkillsModels
-        fields=['pk', 'user', 'company', 'fromskill', 'skill', 'toskill', 'company_attended',]
+        fields=['pk', 'user', 'company', 'role', 'fromskill', 'skill', 'toskill', 'company_attended',]
 class  ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperienceModels
@@ -221,13 +222,15 @@ class UserSerializerRetrieve(UserDetailsSerializer):
     class Meta:
         model =User
         fields = '__all__'
-        # fields = ['username', 'email']
-
-    # def get_employees(self, obj):
-    #     return obj.userprofile.employees.all()
-
-
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+class CategoryFilter(django_filters.FilterSet):
+    category = django_filters.CharFilter(lookup_expr='iexact')
+
+    class Meta:
+        model = categories
+        fields = ['user', 'category']

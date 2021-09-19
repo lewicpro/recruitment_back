@@ -1,6 +1,11 @@
+from django.db.models import fields
+from django_filters import filterset
 from ..models import *
 from .serializers import *
 from django.contrib.auth import get_user_model
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from .filters import *
 
 from datetime import datetime, timedelta
 from django.utils import timezone
@@ -15,6 +20,8 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 import json
 from django.conf import settings
+from rest_framework.viewsets import ModelViewSet
+import django_filters
 from django.core.mail import send_mail
 
 class CreateUserView(generics.CreateAPIView):
@@ -405,13 +412,20 @@ class searchjobsView(generics.CreateAPIView, generics.ListAPIView):
 		lookup_field = 'pk'
 		serializer_class = Job_PostsSerializer
 		permission_classes = [AllowAny]
-		pagination_class = PostPageNumberPagination
+		# pagination_class = PostPageNumberPagination
 		
 
 
 		def get_queryset(self):
 			category=self.kwargs['category']
-			return Job_Posts.objects.filter(category=category).order_by('-pk')
+			momo=self.kwargs['momo']
+			if category == 'all':
+    				return Job_Posts.objects.all().order_by('-pk')
+    				
+			if momo == 'rigeon':
+    				return Job_Posts.objects.filter(location=category).order_by('-pk')
+			if momo == 'category':
+					return Job_Posts.objects.filter(category=category).order_by('-pk')
 
 class getalljobsView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
@@ -683,3 +697,15 @@ class EmployeeViewSet(generics.ListAPIView):
     			 return User.objects.filter(username=goal)
 			if status=='email':
 				 return User.objects.filter(email=goal)
+
+
+
+class CategoryFilterView(generics.ListAPIView):
+    	# lookup_field="pk"
+		serializer_class=Job_PostsSerializer
+		permission_classes = [AllowAny]
+		filterset_class=CategoryFilter
+		filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+
+		search_fields=['category']
+		queryset = categories.objects.all()
