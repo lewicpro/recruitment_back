@@ -538,14 +538,24 @@ class CompanyProfileView(generics.CreateAPIView, generics.ListAPIView):
 		return Company.objects.filter(company=company)
 			
 class ClientProfileView(generics.CreateAPIView, generics.ListAPIView):
+		lookup_field = 'pk'
+		serializer_class =ClientProfileSerializers
+		permission_classes = [AllowAny]
+
+
+		def get_queryset(self):
+			username=self.kwargs['username']
+			return Client_profile.objects.filter(username=username)
+
+class cviewView(generics.CreateAPIView, generics.ListAPIView):
 	lookup_field = 'pk'
-	serializer_class =ClientProfileSerializers
+	serializer_class =CVSerializer
 	permission_classes = [AllowAny]
 
 
 	def get_queryset(self):
 		username=self.kwargs['username']
-		return Client_profile.objects.filter(username=username)
+		return CV.objects.filter(user=username)
 
 
 

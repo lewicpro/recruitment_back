@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^clientcreate1/$', ClientView1.as_view(), name='data'),
     url(r'^Viewnormaluser/$', ClientViewnormaluser.as_view(), name='data'),
     url(r'^clientsdata/(?P<username>.+)/$', GetclientdataView.as_view(), name='data'),
+    url(r'^cview/(?P<username>.+)/$', cviewView.as_view(), name='data'),
     url(r'^qualifaication/(?P<username>.+)/$', qualifaicationView.as_view(), name='data'),
     url(r'^skills/(?P<username>.+)/$', SkillsView.as_view(), name='data'),
     url(r'^Experience/(?P<username>.+)/$', ExperienceView.as_view(), name='data'),
