@@ -16,11 +16,11 @@ class Job_PostsAdmin(admin.ModelAdmin):
 class QualificationAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',
             )
-    list_display=['user', 'company', 'fromeducation', 'Qualification', 'toeducation', 'university_education',]
+    list_display=['user','fromeducation',  'toeducation', 'Qualification', 'university_education',]
     readonly_fields = ('company', )   
 class ClientProfileAdmin(admin.ModelAdmin):
     search_fields = ('date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',)
-    list_display=['date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',]
+    list_display=['date_added', 'username', 'officer_name','profile_photo', 'bio',]
     list_filter = ('username',)
 class CompanyProfileAdmin(admin.ModelAdmin):
     search_fields = ( 'company_name', 'officer_added',
@@ -43,7 +43,7 @@ class DeletedAdmin(admin.ModelAdmin):
 class SkillsAdmin(admin.ModelAdmin):
     search_fields = ('user', 'company', 'role', 'fromskill', 'toskill', 'company_attended',
             )
-    list_display=['user', 'fromskill', 'role', 'toskill', 'company_attended',]
+    list_display=['user', 'fromskill', 'role', 'toskill', 'title', 'company_attended',]
     readonly_fields = ('company', )   
 class VoucherAdmin(admin.ModelAdmin):
     search_fields = ('voucher_token', 'username', 'company_name',)
@@ -73,7 +73,7 @@ class ClientsAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     search_fields = ['user','role', 'from_date', 'to_date', 'company', 'skillsexperience', 'Levelexperience', 'status', ]
             
-    list_display=['user','role', 'from_date', 'to_date', 'skillsexperience', 'title', 'Levelexperience',]
+    list_display=['user','role', 'Levelexperience', 'from_date', 'to_date', 'skillsexperience',]
     readonly_fields = ('company', )   
 
 
