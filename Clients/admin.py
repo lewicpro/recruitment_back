@@ -20,7 +20,7 @@ class QualificationAdmin(admin.ModelAdmin):
     readonly_fields = ('company', )   
 class ClientProfileAdmin(admin.ModelAdmin):
     search_fields = ('date_added', 'username', 'company_name', 'officer_name', 'possition', 'profile_photo', 'bio',)
-    list_display=['date_added', 'username', 'officer_name','profile_photo', 'bio',]
+    list_display=['date_added', 'username','profile_photo', 'bio',]
     list_filter = ('username',)
 class CompanyProfileAdmin(admin.ModelAdmin):
     search_fields = ( 'company_name', 'officer_added',
@@ -55,7 +55,7 @@ class EmailsAdmin(admin.ModelAdmin):
 
 class categoriesAdmin(admin.ModelAdmin):
     search_fields = ('date', 'user', 'company', 'category',)
-    list_display=['date', 'user', 'company', 'category',]
+    list_display=['date', 'category',]
     readonly_fields = ('company', )   
 
 class CVAdmin(admin.ModelAdmin):
