@@ -162,7 +162,7 @@ class QualificationModels(models.Model):
 class SkillsModels(models.Model):
     user = models.CharField(max_length=120, null=True)
     company=models.CharField(max_length=120, blank=True, null=True)
-    skill=models.CharField(max_length=120, blank=True, null=True)
+    skill=models.TextField(blank=True, null=True)
     fromskill=models.CharField(max_length=120, blank=True, null=True)
     role=models.TextField(blank=True, null=True)
     toskill=models.CharField(max_length=120, blank=True, null=True)
@@ -177,7 +177,7 @@ class ExperienceModels(models.Model):
     user = models.CharField(max_length=120, null=True)
     company=models.CharField(max_length=120, blank=True, null=True)
     company_attended=models.CharField(max_length=120, blank=True, null=True)
-    skillsexperience=models.CharField(max_length=120, blank=True, null=True)
+    skillsexperience=models.TextField(blank=True, null=True)
     Levelexperience=models.CharField(max_length=120, blank=True, null=True)
     role=models.TextField(blank=True, null=True)
     from_date=models.CharField(max_length=120, blank=True, null=True)
