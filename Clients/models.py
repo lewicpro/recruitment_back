@@ -141,7 +141,7 @@ class ClientsModels(models.Model):
     Linkedin=models.CharField(max_length=120, blank=True, null=True)
     twitter_url=models.CharField(max_length=120, blank=True, null=True)
     pinterest_url=models.CharField(max_length=120, blank=True, null=True)
-    company_profile=models.CharField(max_length=920, blank=True, null=True)
+    company_profile=models.TextField(blank=True, null=True)
     logo=models.FileField(blank=True, null=True)
     class Meta:
         verbose_name_plural = "List of clients & Candidates"
@@ -164,7 +164,7 @@ class SkillsModels(models.Model):
     company=models.CharField(max_length=120, blank=True, null=True)
     skill=models.CharField(max_length=120, blank=True, null=True)
     fromskill=models.CharField(max_length=120, blank=True, null=True)
-    role=models.CharField(max_length=120, blank=True, null=True)
+    role=models.TextField(blank=True, null=True)
     toskill=models.CharField(max_length=120, blank=True, null=True)
     company_attended=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
@@ -179,7 +179,7 @@ class ExperienceModels(models.Model):
     company_attended=models.CharField(max_length=120, blank=True, null=True)
     skillsexperience=models.CharField(max_length=120, blank=True, null=True)
     Levelexperience=models.CharField(max_length=120, blank=True, null=True)
-    role=models.CharField(max_length=120, blank=True, null=True)
+    role=models.TextField(blank=True, null=True)
     from_date=models.CharField(max_length=120, blank=True, null=True)
     title=models.CharField(max_length=120, blank=True, null=True)
     to_date=models.CharField(max_length=120, blank=True, null=True)
