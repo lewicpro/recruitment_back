@@ -90,7 +90,7 @@ class SkillsSerializer(serializers.ModelSerializer):
 class  ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperienceModels
-        fields=['pk', 'user','role', 'company_attended', 'from_date', 'to_date', 'company', 'skillsexperience', 'Levelexperience', 'status',]
+        fields=['pk', 'user','role', 'title', 'company_attended', 'from_date', 'to_date', 'company', 'skillsexperience', 'Levelexperience', 'status',]
 
 class  CVSerializer(serializers.ModelSerializer):
     class Meta:
