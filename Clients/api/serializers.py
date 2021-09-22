@@ -86,7 +86,7 @@ class QualificationSerializer(serializers.ModelSerializer):
 class SkillsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SkillsModels
-        fields=['pk', 'user', 'title', 'company', 'role', 'fromskill', 'skill', 'toskill', 'company_attended',]
+        fields=['pk', 'user', 'title', 'company', 'role', 'fromskill', 'skill', 'toskill', 'company_attended', ]
 class  ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperienceModels
