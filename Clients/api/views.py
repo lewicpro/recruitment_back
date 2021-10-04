@@ -557,6 +557,16 @@ class cviewView(generics.CreateAPIView, generics.ListAPIView):
 		username=self.kwargs['username']
 		return CV.objects.filter(user=username)
 
+class cvavailabilityView(generics.CreateAPIView, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class =CVSerializer
+	permission_classes = [AllowAny]
+
+
+	def get_queryset(self):
+		username=self.kwargs['username']
+		return CV.objects.filter(user=username)
+
 
 
 class Deleteview(generics.CreateAPIView, generics.ListAPIView):

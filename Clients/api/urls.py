@@ -62,6 +62,7 @@ urlpatterns = [
     url(r'^empdata/(?P<username>.+)/$', GetclientdataView.as_view(), name='data'),
     url(r'^searched/(?P<keyword>.+)/(?P<mkoa>.+)/$', searchedView.as_view(), name='data'),
     url(r'^state/(?P<username>.+)/(?P<pk>.+)/$', UpdatestatusView.as_view(), name='data'),
+    url(r'^cvavailability/(?P<username>.+)/$', cvavailabilityView.as_view(), name='data'),
     url(r'^deleteapplied/(?P<action>.+)/(?P<pk>.+)/$', Deleteview.as_view(), name='data'),
     url(r'^updatuser/(?P<username>.+)/$', Upadateview.as_view(), name='data'),
     url(r'^jobdetails/(?P<pk>.+)/$', JobDetailsview.as_view(), name='data'),
