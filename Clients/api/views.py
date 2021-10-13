@@ -565,7 +565,7 @@ class cvavailabilityView(generics.CreateAPIView, generics.ListAPIView):
 
 	def get_queryset(self):
 		username=self.kwargs['username']
-		return CV.objects.filter(user=username)
+		return CV.objects.filter(user=username, cvtittle__icontains='cv')
 
 
 
